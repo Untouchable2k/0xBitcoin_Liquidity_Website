@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Uniswap V3 &middot; 0xBTC/WETH Positions</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;color:#e2e8f0;min-height:100vh}
+  header{background:linear-gradient(135deg,#1a1f2e,#0f1117);border-bottom:1px solid #2d3748;padding:2rem 2.5rem}
+  header h1{font-size:1.8rem;font-weight:700;background:linear-gradient(90deg,#f97316,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.3rem}
+  header p{color:#94a3b8;font-size:.9rem}
+  .stats{display:flex;flex-wrap:wrap;gap:1rem;padding:1.5rem 2.5rem;background:#141820;border-bottom:1px solid #2d3748}
+  .stat-card{background:#1e2535;border:1px solid #2d3748;border-radius:12px;padding:1rem 1.5rem;min-width:160px}
+  .stat-card .label{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em}
+  .stat-card .value{font-size:1.4rem;font-weight:700;margin-top:.2rem}
+  .legend{display:flex;gap:1.5rem;padding:1rem 2.5rem;background:#0f1117;border-bottom:1px solid #2d3748;flex-wrap:wrap}
+  .legend-item{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:#94a3b8}
+  .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .table-wrap{overflow-x:auto;padding:1.5rem 2.5rem}
+  table{width:100%;border-collapse:collapse;font-size:.82rem}
+  thead tr{background:#1e2535}
+  thead th{padding:.75rem 1rem;text-align:left;font-weight:600;color:#94a3b8;text-transform:uppercase;font-size:.7rem;letter-spacing:.06em;border-bottom:2px solid #2d3748;white-space:nowrap}
+  tbody tr{border-bottom:1px solid #1e2535;transition:background .15s}
+  tbody tr:hover{background:#1a2030}
+  td{padding:.65rem 1rem;vertical-align:middle;white-space:nowrap}
+  .badge{display:inline-block;padding:.2rem .6rem;border-radius:999px;font-size:.7rem;font-weight:700;color:#fff;letter-spacing:.04em}
+  .mono{font-family:'Cascadia Code','Fira Mono',monospace;font-size:.78rem}
+  .addr{color:#60a5fa;text-decoration:none;font-family:'Cascadia Code','Fira Mono',monospace;font-size:.78rem}
+  .addr:hover{text-decoration:underline}
+  footer{text-align:center;padding:2rem;color:#475569;font-size:.8rem;border-top:1px solid #2d3748}
+  @media(max-width:768px){header,.stats,.legend,.table-wrap{padding-left:1rem;padding-right:1rem}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Uniswap V3 &middot; 0xBTC / WETH Positions</h1>
+  <p>Pool: <code style="color:#94a3b8">0xaff587846a44aa086a6555ff69055d3380fd379a</code> &nbsp;&middot;&nbsp;
+     NFT Manager: <code style="color:#94a3b8">0xc36442b4a4522e871399cd717abdd847ab11fe88</code> &nbsp;&middot;&nbsp;
+     Updated: 2026-03-24 22:08 UTC</p>
+</header>
+
+<div class="stats">
+  <div class="stat-card"><div class="label">Active Positions</div><div class="value" style="color:#f97316">26</div></div>
+  <div class="stat-card"><div class="label">In Range</div><div class="value" style="color:#22c55e">3</div></div>
+  <div class="stat-card"><div class="label">Above Range</div><div class="value" style="color:#f59e0b">23</div></div>
+  <div class="stat-card"><div class="label">Below Range</div><div class="value" style="color:#6366f1">0</div></div>
+  <div class="stat-card"><div class="label">Current Tick</div><div class="value" style="color:#e2e8f0">118,387</div></div>
+  <div class="stat-card"><div class="label">Current Price (WETH/0xBTC)</div><div class="value" style="color:#e2e8f0">1384283447714178.250000</div></div>
+  <div class="stat-card"><div class="label">Latest Block</div><div class="value" style="color:#94a3b8">24,730,284</div></div>
+  <div class="stat-card"><div class="label">Total Pool Events</div><div class="value" style="color:#94a3b8">426</div></div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="dot" style="background:#22c55e"></div>In Range &mdash; tick inside [tickLower, tickUpper)</div>
+  <div class="legend-item"><div class="dot" style="background:#f59e0b"></div>Above Range &mdash; current price above upper bound</div>
+  <div class="legend-item"><div class="dot" style="background:#6366f1"></div>Below Range &mdash; current price below lower bound</div>
+  <div class="legend-item" style="margin-left:auto;color:#64748b">Prices: WETH per 0xBTC (decimal-adjusted &times;10<sup>10</sup>)</div>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Status</th>
+        <th>Real Owner</th>
+        <th>NFT Token ID</th>
+        <th>Tick Lower / Upper</th>
+        <th>Price Lower</th>
+        <th>Price Upper</th>
+        <th>Current Price</th>
+        <th>Liquidity</th>
+        <th>0xBTC Minted</th>
+        <th>WETH Minted</th>
+        <th>Mints</th>
+        <th>Burns</th>
+        <th>First Block</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td><span class="badge" style="background:#22c55e">IN RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0x2e3bf43c2937925bd3e9f61b0362276255fe3096" target="_blank">0x2e3bf4&hellip;fe3096</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/514579" target="_blank">#514579</a></td>
+          <td class="mono">-887,200 / 887,200</td>
+          <td>0.000000</td>
+          <td>3378158579007110879054804892064751595285607612416.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">844,626,408,438,619</td>
+          <td>10,000.000000 0xBTC</td>
+          <td>0.713394 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>17,357,386</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#22c55e">IN RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0x560ea9b1f348aff179d9bf5b02b50cc04abd344c" target="_blank">0x560ea9&hellip;bd344c</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/697655" target="_blank">#697655</a></td>
+          <td class="mono">-887,200 / 887,200</td>
+          <td>0.000000</td>
+          <td>3378158579007110879054804892064751595285607612416.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">872,404,814,561,849</td>
+          <td>15,000.000000 0xBTC</td>
+          <td>0.507393 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>19,518,321</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#22c55e">IN RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0x41d7e3da4678ac1f5b7f607c9f6f2140b87adc7c" target="_blank">0x41d7e3&hellip;7adc7c</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/1231497" target="_blank">#1231497</a></td>
+          <td class="mono">118,200 / 118,400</td>
+          <td>1358639150865398.500000</td>
+          <td>1386084096333299.750000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">59,390,797,747,737,720</td>
+          <td>0 0xBTC</td>
+          <td>0.220000 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>24,680,000</td>
+        </tr>
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0xd43e068b6721bf3f2dd62a0d562d777a7fc48171" target="_blank">0xd43e06&hellip;c48171</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/1188543" target="_blank">#1188543</a></td>
+          <td class="mono">120,800 / 156,000</td>
+          <td>1762037086575307.500000</td>
+          <td>59518940345072224.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">2,535,004,085,590,637</td>
+          <td>50,000.000000 0xBTC</td>
+          <td>0 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>24,360,777</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0x4f9a52f741db85b1d3e0d65a34584cccabd69021" target="_blank">0x4f9a52&hellip;d69021</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/1199454" target="_blank">#1199454</a></td>
+          <td class="mono">121,800 / 150,200</td>
+          <td>1947342408566431.500000</td>
+          <td>33325523840667164.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">1,165,419,859,389,626</td>
+          <td>20,025.550000 0xBTC</td>
+          <td>0 WETH</td>
+          <td>2</td>
+          <td>0</td>
+          <td>24,430,342</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0x41fec248777efa4bdba27108cef74da24b74a4bb" target="_blank">0x41fec2&hellip;74a4bb</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/29794" target="_blank">#29794</a></td>
+          <td class="mono">126,800 / 173,200</td>
+          <td>3210544591072278.000000</td>
+          <td>332356634526414592.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">350,838,847,845,077</td>
+          <td>1,330.447305 0xBTC</td>
+          <td>0.436006 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>12,539,366</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0x3584efbb3dab1d249c635e53305b1fba77c723a5" target="_blank">0x3584ef&hellip;c723a5</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/330341" target="_blank">#330341</a></td>
+          <td class="mono">131,200 / 147,400</td>
+          <td>4984926099640497.000000</td>
+          <td>25187241689681484.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">426,343,124,178,693</td>
+          <td>1,435.281476 0xBTC</td>
+          <td>0.139991 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>15,672,859</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0x9c2323b8a57da0bd3cbe325c7f4db05cbb896dbd" target="_blank">0x9c2323&hellip;896dbd</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/374697" target="_blank">#374697</a></td>
+          <td class="mono">137,000 / 168,200</td>
+          <td>8903011414543350.000000</td>
+          <td>201589528138445920.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">11,938,106,337,209</td>
+          <td>74.956212 0xBTC</td>
+          <td>0.002771 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>16,050,172</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0x9c2323b8a57da0bd3cbe325c7f4db05cbb896dbd" target="_blank">0x9c2323&hellip;896dbd</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/374765" target="_blank">#374765</a></td>
+          <td class="mono">137,000 / 168,200</td>
+          <td>8903011414543350.000000</td>
+          <td>201589528138445920.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">34,021,471,789,671</td>
+          <td>210.362641 0xBTC</td>
+          <td>0.008350 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>16,050,761</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0x9c2323b8a57da0bd3cbe325c7f4db05cbb896dbd" target="_blank">0x9c2323&hellip;896dbd</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/374768" target="_blank">#374768</a></td>
+          <td class="mono">137,000 / 168,200</td>
+          <td>8903011414543350.000000</td>
+          <td>201589528138445920.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">45,330,861,041,408</td>
+          <td>279.624505 0xBTC</td>
+          <td>0.011220 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>16,050,778</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0xfecacb6c8b8b59fd2823c7b2ad3722620ff324ed" target="_blank">0xfecacb&hellip;f324ed</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/376333" target="_blank">#376333</a></td>
+          <td class="mono">137,000 / 168,200</td>
+          <td>8903011414543350.000000</td>
+          <td>201589528138445920.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">81,996,669,661,343</td>
+          <td>455.661424 0xBTC</td>
+          <td>0.027967 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>16,063,219</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0x922d7d8e4a7f17141bd598951ecb4f02791a0bb3" target="_blank">0x922d7d&hellip;1a0bb3</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/403317" target="_blank">#403317</a></td>
+          <td class="mono">137,000 / 168,200</td>
+          <td>8903011414543350.000000</td>
+          <td>201589528138445920.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">220,874,357,965,803</td>
+          <td>1,308.012925 0xBTC</td>
+          <td>0.062630 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>16,319,674</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0x4ad610b4a338c9d1c4820ecc53ebc68d35b35962" target="_blank">0x4ad610&hellip;b35962</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/378515" target="_blank">#378515</a></td>
+          <td class="mono">137,400 / 151,200</td>
+          <td>9266331671568046.000000</td>
+          <td>36830215639078856.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">467,932,021,364,021</td>
+          <td>1,000.000000 0xBTC</td>
+          <td>0.186394 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>16,079,635</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0x560ea9b1f348aff179d9bf5b02b50cc04abd344c" target="_blank">0x560ea9&hellip;bd344c</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/449240" target="_blank">#449240</a></td>
+          <td class="mono">137,800 / 141,000</td>
+          <td>9644478553317574.000000</td>
+          <td>13281466697314712.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">4,380,997,185,808,624</td>
+          <td>42,177.516046 0xBTC</td>
+          <td>4.533600 WETH</td>
+          <td>1</td>
+          <td>3</td>
+          <td>16,683,377</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0xfed0ae47b1e3a1008fcbb8fb42789df1e2102415" target="_blank">0xfed0ae&hellip;102415</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/343046" target="_blank">#343046</a></td>
+          <td class="mono">138,200 / 168,200</td>
+          <td>10038057114964316.000000</td>
+          <td>201589528138445920.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">29,687,527,220,511</td>
+          <td>199.999997 0xBTC</td>
+          <td>0.003374 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>15,816,356</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0x5d7166ee0c633021cb502fa5302866316d86f701" target="_blank">0x5d7166&hellip;86f701</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/363077" target="_blank">#363077</a></td>
+          <td class="mono">138,200 / 168,200</td>
+          <td>10038057114964316.000000</td>
+          <td>201589528138445920.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">454,850,301,292,516</td>
+          <td>2,672.898663 0xBTC</td>
+          <td>0.105574 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>15,970,360</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0xd73cdaf9f97162ce13cbdecf3950b8c5b0dd876e" target="_blank">0xd73cda&hellip;dd876e</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/401577" target="_blank">#401577</a></td>
+          <td class="mono">142,200 / 207,400</td>
+          <td>14974722042966152.000000</td>
+          <td>10158210809073426432.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">5,161,836,569,821,612</td>
+          <td>39,430.016119 0xBTC</td>
+          <td>0.174221 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>16,300,538</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0xd652605f7a1cbaea78e9c86f21cbda25b7cd4e06" target="_blank">0xd65260&hellip;cd4e06</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/45968" target="_blank">#45968</a></td>
+          <td class="mono">143,200 / 154,200</td>
+          <td>16549544565738794.000000</td>
+          <td>49714845286772064.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">79,378,112,520,700</td>
+          <td>100.142017 0xBTC</td>
+          <td>0.036016 WETH</td>
+          <td>1</td>
+          <td>1</td>
+          <td>12,625,999</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0xd2e1a64edd2999f339c0b3aa2af3a7b5079411af" target="_blank">0xd2e1a6&hellip;9411af</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/204497" target="_blank">#204497</a></td>
+          <td class="mono">145,600 / 168,200</td>
+          <td>21038342022611676.000000</td>
+          <td>201589528138445920.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">596,003,558,686,934</td>
+          <td>2,000.000000 0xBTC</td>
+          <td>0.203069 WETH</td>
+          <td>1</td>
+          <td>1</td>
+          <td>14,397,610</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0x4aa1b227a320410a7f722ce241ac38387b0001b9" target="_blank">0x4aa1b2&hellip;0001b9</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/166216" target="_blank">#166216</a></td>
+          <td class="mono">145,800 / 368,400</td>
+          <td>21463323261506388.000000</td>
+          <td>99680176018184257205698560.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">158,054,430,311,088</td>
+          <td>649.596576 0xBTC</td>
+          <td>0.153000 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>13,791,331</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0xf9c2e95068481ae0b558fda45386e312aab8393b" target="_blank">0xf9c2e9&hellip;b8393b</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/47410" target="_blank">#47410</a></td>
+          <td class="mono">146,000 / 181,000</td>
+          <td>21896889257375700.000000</td>
+          <td>724998506865422848.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">106,426,811,180,748</td>
+          <td>478.698217 0xBTC</td>
+          <td>0.030138 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>12,633,573</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0x0027a46efb18a6d72f113f8ebf4328ad65df22fa" target="_blank">0x0027a4&hellip;df22fa</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/27305" target="_blank">#27305</a></td>
+          <td class="mono">150,000 / 150,400</td>
+          <td>32665666919347696.000000</td>
+          <td>33998710082881444.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">57,765,680,576,009,807</td>
+          <td>3,300.000000 0xBTC</td>
+          <td>0.998725 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>12,527,875</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0x9d59659afc1399ee48fd974f102041710fe041af" target="_blank">0x9d5965&hellip;e041af</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/27469" target="_blank">#27469</a></td>
+          <td class="mono">150,000 / 150,400</td>
+          <td>32665666919347696.000000</td>
+          <td>33998710082881444.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">70,184,330,645,713,709</td>
+          <td>2,849.258470 0xBTC</td>
+          <td>1.600870 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>12,528,646</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0xd235e4a4459390671c150cffb8fae686924b655f" target="_blank">0xd235e4&hellip;4b655f</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/27483" target="_blank">#27483</a></td>
+          <td class="mono">150,000 / 150,400</td>
+          <td>32665666919347696.000000</td>
+          <td>33998710082881444.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">83,605,484,223,806,056</td>
+          <td>3,394.114212 0xBTC</td>
+          <td>1.907000 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>12,528,701</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0x0027a46efb18a6d72f113f8ebf4328ad65df22fa" target="_blank">0x0027a4&hellip;df22fa</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/27892" target="_blank">#27892</a></td>
+          <td class="mono">150,000 / 150,400</td>
+          <td>32665666919347696.000000</td>
+          <td>33998710082881444.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">40,343,930,195,148,319</td>
+          <td>2,205.250018 0xBTC</td>
+          <td>0.730655 WETH</td>
+          <td>1</td>
+          <td>0</td>
+          <td>12,530,917</td>
+        </tr>
+
+        <tr>
+          <td><span class="badge" style="background:#f59e0b">ABOVE RANGE</span></td>
+          <td><a class="addr" href="https://etherscan.io/address/0x31d880ce497b64801b614cfb0a6fb00c61a900cf" target="_blank">0x31d880&hellip;a900cf</a></td>
+          <td><a class="addr" href="https://app.uniswap.org/positions/v3/eth/166767" target="_blank">#166767</a></td>
+          <td class="mono">154,600 / 166,200</td>
+          <td>51743643131288664.000000</td>
+          <td>165049196559118080.000000</td>
+          <td>1384283447714178.250000</td>
+          <td class="mono">1,206,331,581,128,533</td>
+          <td>1,358.629293 0xBTC</td>
+          <td>0.631715 WETH</td>
+          <td>2</td>
+          <td>1</td>
+          <td>13,801,100</td>
+        </tr>
+    </tbody>
+  </table>
+</div>
+
+<footer>
+  Data from Ethereum mainnet via Tenderly RPC &nbsp;&middot;&nbsp;
+  Blocks 12,379,600 &rarr; 24,730,284 &nbsp;&middot;&nbsp;
+  Generated 2026-03-24 22:08 UTC
+</footer>
+</body>
+</html>
